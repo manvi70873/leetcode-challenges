@@ -1,0 +1,34 @@
+class WordFilter {
+public:
+    unordered_map<string, int> mp;
+    
+    WordFilter(vector<string>& words) 
+    {
+        
+        for(int k=0;k<words.size();k++){
+            
+            string word=words[k];
+        
+        for(int i=0;i<word.size();i++){
+            
+            string pre= word.substr(0,i+1);
+            
+        for(int j=0;j<word.size();j++){
+            
+            
+            
+            string suf = word.substr(j, word.size());
+             mp[pre + "|" + suf] = k+1;
+        }
+        }
+        }
+        
+
+    }
+    
+    int f(string prefix, string suffix) 
+    {
+        string s = prefix + "|" + suffix;
+        return mp[s]-1;
+    }
+};
