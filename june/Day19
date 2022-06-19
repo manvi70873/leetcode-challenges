@@ -1,0 +1,45 @@
+#include <fstream>
+
+        bool comparator(string a,string b)
+        {
+             return a<b;
+        }
+
+
+class Solution {
+    
+ 
+public:
+    vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
+        
+        vector<vector<string>> output;
+        vector<string> v1;
+        
+        int count=0;
+        
+       sort(products.begin(),products.end(),comparator);
+      
+       
+        for(int i=0;i<searchWord.size();i++){
+           string substring1=searchWord.substr(0,i+1);
+            for(int j=0;j<products.size();j++){
+                string product=products[j];
+                string substring2=product.substr(0,i+1);
+                if(substring1==substring2)
+                  {
+                    if(count!=3){
+                        count++;
+                        v1.push_back(products[j]);
+                    }
+                    else{
+                        break;
+                    }
+                  } 
+            }
+            count=0;
+            output.push_back(v1);
+            v1.clear();
+     }
+        return output;
+    }
+};
