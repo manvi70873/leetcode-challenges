@@ -1,0 +1,21 @@
+class Solution {
+    
+public:
+    int minimumLengthEncoding(vector<string>& words) {
+       set<string>s1(words.begin(),words.end());
+       set<string>s2(words.begin(),words.end());
+        
+        for(auto ele:s1){
+            for(int i=1;i<ele.size();i++){
+                s2.erase(ele.substr(i));
+            }
+        }
+        
+        int sum=0;
+        for(auto ele1:s2){
+          sum=sum+ele1.length()+1;
+        }
+        
+        return sum;
+    }
+};
