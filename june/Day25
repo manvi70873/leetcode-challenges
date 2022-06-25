@@ -1,22 +1,33 @@
 class Solution {
 public:
     bool checkPossibility(vector<int>& nums) {
-        int violation=0;
-        for(int i=1;i<nums.size();i++){
-            if(nums[i-1]>nums[i]){
-                if(violation==1){
-                    return false;
-                }
-                
-                if(i<2 || nums[i-2]<=nums[i]){
-                    nums[i-1]=nums[i];
-                }
-                else{
-                    nums[i]=nums[i-1];
-                }
-                violation++;
+        
+        vector<vector<int>> subsq;
+        int i=0;
+        
+        while(i<nums.size()){
+            vector<int> temp;
+            int ele=nums[i];
+            while(i<nums.size() && ele<=nums[i]){
+                temp.push_back(nums[i]);
+                ele=nums[i];
+                i++;
             }
+            subsq.push_back(temp);
+                //temp.clear();    
         }
-        return true;
+        
+        if(subsq.size()==1) return true;
+        if(subsq.size()>2) return false;
+        
+            vector<int> one =subsq[0];
+            int onesize=one.size();
+            vector<int> two =subsq[1];
+            int twosize=two.size();
+        
+        if(one.size()==1 || two.size()==1)return true;
+        if(one[onesize-2]<=two[0] || two[1]>=one[onesize-1]) return true;
+        
+        return false;
     }
 };
