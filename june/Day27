@@ -1,0 +1,29 @@
+#include<sstream>
+
+class Solution {
+
+public:
+
+    int minPartitions(string n) {
+
+        int maxele=0;
+
+        
+
+        for(int i=0;i<n.length();i++){
+
+            string p(1,n[i]);
+
+            int a=stoi(p);
+
+            maxele=max(maxele,a);
+
+        }
+
+        cout<<maxele;
+
+        return maxele;
+
+    }
+
+};
