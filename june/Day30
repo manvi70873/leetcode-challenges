@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int minMoves2(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        long p=nums[nums.size()/2];
+        long count=0;
+        
+        for(auto i:nums){
+            if(i!=p){
+                if(i<p){
+                    while(i!=p){
+                        count=count+(p-i);
+                        i=i+(p-i);
+                    }
+                }
+                else{
+                    while(i!=p){
+                        count=count+(i-p);
+                        i=i-(i-p);
+                    }
+                }
+            }
+        }
+        return count;
+    }
+};
