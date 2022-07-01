@@ -1,0 +1,40 @@
+class Solution {
+    
+    static bool comp(vector<int>& a,vector<int>& b){
+        if(a[1]==b[1]){
+            return a[0]<b[0];
+        }
+        return a[1]>b[1];
+    }
+    
+public:
+    int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) {
+        int my_units=0;
+        int my_changed_units=0;
+        int ans=0;
+        int count=0;
+        
+        sort(boxTypes.begin(),boxTypes.end(),comp);
+        
+        
+      while(truckSize!=0 && count!=boxTypes.size()){  
+         
+        for(auto i:boxTypes){
+            my_units=i[0]*i[1];
+             count++;
+            if(i[0]<=truckSize){
+                truckSize=truckSize-i[0];
+                ans=ans+my_units;
+            }
+            else{
+                int p=truckSize;
+             my_changed_units=p*i[1];
+                truckSize=truckSize-p;
+                ans=ans+my_changed_units;
+            }
+        }
+      }
+        
+        return ans;
+    }
+};
