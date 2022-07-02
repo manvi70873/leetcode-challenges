@@ -1,0 +1,105 @@
+class Solution {
+
+public:
+
+    int maxArea(int h, int w, vector<int>& horizontalCuts, vector<int>& verticalCuts) {
+
+        const unsigned int M = 1000000007;
+
+            
+
+        vector<int>v1;
+
+        vector<int>v2;
+
+        
+
+        sort(horizontalCuts.begin(), horizontalCuts.end());
+
+        sort(verticalCuts.begin(), verticalCuts.end());
+
+        
+
+        
+
+    if(horizontalCuts.size()==1 || horizontalCuts.size()==0){
+
+            v1.push_back(horizontalCuts[0]-0);
+
+            v1.push_back(h-horizontalCuts[0]);
+
+        }
+
+else{
+
+        v1.push_back(horizontalCuts[0]-0);
+
+        for(int i=0;i<=horizontalCuts.size()-2;i++){
+
+            v1.push_back(horizontalCuts[i+1]-horizontalCuts[i]);
+
+        }
+
+        v1.push_back(h-horizontalCuts[horizontalCuts.size()-1]);
+
+        
+
+}
+
+        
+
+        if(verticalCuts.size()==1 || verticalCuts.size()==0){
+
+            v2.push_back(verticalCuts[0]-0);
+
+            v2.push_back(w-verticalCuts[0]);
+
+        }
+
+        else{
+
+        v2.push_back(verticalCuts[0]-0);
+
+        for(int i=0;i<=verticalCuts.size()-2;i++){
+
+            v2.push_back(verticalCuts[i+1]-verticalCuts[i]);
+
+        }
+
+        v2.push_back(w-verticalCuts[verticalCuts.size()-1]);
+
+        }
+
+        
+
+        for (int i = 0; i < v1.size(); i++) 
+
+        cout << v1[i] << " "; 
+
+    cout << endl;
+
+        
+
+        for (int i = 0; i < v2.size(); i++) 
+
+        cout << v2[i] << " "; 
+
+    cout << endl;
+
+        
+
+        unsigned long long maxh=*max_element(v1.begin(),v1.end());
+
+        unsigned long long maxw=*max_element(v2.begin(),v2.end());
+
+        
+
+        unsigned long long ans=(maxh*maxw)%M;
+
+        
+
+        return ans;
+
+    }
+
+};
