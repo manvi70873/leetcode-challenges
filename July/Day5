@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        int maxele=1;      //maintain length of Consecutive Sequence
+        int ans=1;         //final ans maintain length of Longest Consecutive Sequence
+        
+        set<int> s;
+        
+        //Boundaary Conditions
+        if(nums.size()==0) return 0;
+        if(nums.size()==1) return 1;
+        
+        //inserted nums vector in set to make it unique and sorted
+        s.insert(nums.begin(),nums.end());
+        nums.clear();
+       
+        //pushing set elements agin in nums vector
+        for (auto it = s.begin(); it !=s.end(); ++it)
+            nums.push_back(*it);
+        
+       
+        
+        for(int i=0;i<nums.size()-1;i++){
+            if(nums[i+1]-nums[i]==1){   //difference is 1 means the are Consecutive Sequence
+                maxele=maxele+1;        //so we inc it 
+            }
+            else{                       //we found the breakpoint
+                ans=max(maxele,ans);    //maintaining the longest length 
+                maxele=1;               //again start count the length of Consecutive Sequence
+            }
+        }
+        ans=max(maxele,ans);    //if full nums vector is Longest Consecutive Sequence
+        return ans;
+    }
+};
+
+
