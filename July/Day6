@@ -1,0 +1,20 @@
+class Solution {
+
+public:
+    int fib(int n) {
+        int sum=0;
+        int a=0;
+        int b=1;
+        int p=0;
+        if(n==0) return a;
+        if(n==1) return b;
+        
+        while(p!=n-1){
+            sum=a+b;
+            a=b;
+            b=sum;
+            p++;
+        }
+        return sum;
+    }
+};
