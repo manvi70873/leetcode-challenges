@@ -1,0 +1,19 @@
+class Solution
+{
+public:
+    int maxResult(vector<int> &nums, int k)
+    {
+        vector<int> v(nums.size());
+        v[0] = nums[0];
+        priority_queue<pair<int, int>> pq;
+        pq.push({nums[0], 0});
+        for (int i = 1; i < nums.size(); i++)
+        {
+            while (!pq.empty() && pq.top().second < i - k)
+                pq.pop();
+            v[i] = nums[i] + pq.top().first;
+            pq.push({v[i], i});
+        }
+        return v[nums.size() - 1];
+    }
+};
