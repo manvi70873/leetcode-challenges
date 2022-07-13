@@ -1,0 +1,61 @@
+class Solution {
+    
+    int already(vector<int> vec ,int pos){
+        for(int i=0;i<pos;i++){
+            if(vec[i]==vec[pos]){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    bool recurse(vector<int> vec,vector<int> v,int target,int s){
+        
+        if(s==v.size()) 
+               return vec[0]==target and vec[1]==target and vec[2]==target and vec[3]==target;
+            
+        for(int i=0;i<4;i++){
+            if(vec[i]+v[s]>target or already(vec,i)) continue;
+            vec[i]=vec[i]+v[s];
+            if(recurse(vec,v,target,s+1)) return true;
+            vec[i]=vec[i]-v[s];
+        }
+        return false;
+    }
+    
+public:
+    bool makesquare(vector<int>& v) {
+        sort(v.begin(), v.end(), greater<int>());
+        
+        if(v.size()<4){
+            return false;
+        }
+        
+        int sum=accumulate(v.begin(),v.end(),0);
+        
+        if(sum%4){
+            return false;
+        }
+        
+        int target=sum/4;
+        
+        if(v[0]>target){
+            return false;
+        }
+        
+        vector<int> vec(4,0);
+        
+       return recurse(vec,v,target,0);
+       
+     }
+};
+
+
+
+
+
+
+
+            
+            
+      
