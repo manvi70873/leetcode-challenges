@@ -1,0 +1,37 @@
+class Solution {
+  //int[][][] dp;
+  int mod=1000000007;
+    
+    
+    int help(int m,int n,int maxMove,int row,int col,vector<vector<vector<long>>>& dp){
+        if(maxMove<0){
+            return 0;
+        }
+        
+        if(row<0 || col<0 || row==m || col==n){
+            return 1;
+        }
+        
+        if(dp[row][col][maxMove]!=-1){
+            return dp[row][col][maxMove];
+        }
+        
+        long total=0;
+        long down=help(m,n,maxMove-1,row+1,col,dp);
+        long up=help(m,n,maxMove-1,row-1,col,dp);
+        long left=help(m,n,maxMove-1,row,col+1,dp);
+        long right=help(m,n,maxMove-1,row,col-1,dp);
+        total=(left+right+up+down)%mod;
+        dp[row][col][maxMove]=total;
+        return total;
+    }
+    
+public:
+    int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
+        
+        vector<vector<vector<long>>> dp(m+1, vector<vector<long>>(n+1, vector<long>(maxMove+1, -1)));
+        
+        
+        return help(m,n,maxMove,startRow,startColumn,dp);
+    }
+};
