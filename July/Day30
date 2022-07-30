@@ -1,0 +1,36 @@
+class Solution {
+    
+    vector<int> count_freq(string s){
+        vector<int> temp(26,0);
+        
+        for(int i=0;i<s.length();i++){
+            int index=s[i]-'a';
+            temp[index]++;
+        }
+        return temp;
+    }
+    
+    
+public:
+    vector<string> wordSubsets(vector<string>& a, vector<string>& b) {
+        vector<int>count_max(26,0);
+        vector<string>v;
+        for(int i=0;i<b.size();i++){
+            vector<int> temp=count_freq(b[i]);
+            for(int j=0;j<26;j++){
+                count_max[j]=max(count_max[j],temp[j]);
+            }
+        }
+        
+        for(int i=0;i<a.size();i++){
+            vector<int> temp=count_freq(a[i]);
+            for(int j=0;j<26;j++){
+                if(temp[j]<count_max[j])
+                    goto h;
+            }
+            v.push_back(a[i]);
+            h:;
+        }
+        return v;
+    }
+};
