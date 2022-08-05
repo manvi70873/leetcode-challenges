@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int mirrorReflection(int p, int q) {
+       int i=0;
+        int count=0;
+        if(q==0) return 0;
+        while(i<=p){
+            if(i==p){
+                if((count%2)==0) return 2;
+                else return 1;
+            }
+            count++;
+            i=i+q;
+        }
+        return 0;
+       
+    }
+};
