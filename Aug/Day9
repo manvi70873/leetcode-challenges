@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int m=1000000007;
+    # define ll long long
+    int numFactoredBinaryTrees(vector<int>& arr) {
+        vector<ll>dp(arr.size(),1);
+        map<ll,ll>mp;
+        
+        sort(arr.begin(),arr.end());
+        for(int i=0;i<arr.size();i++){
+            mp[arr[i]]=i;
+            for(int j=i-1;j>=0;j--){
+                if(arr[i]%arr[j]==0){
+                    int temp=arr[i]/arr[j];
+                    if(mp.count(temp)) dp[i]+=(dp[j]*dp[mp[temp]])%m;
+                }
+            }
+        }
+        ll ans=0;
+        ans=accumulate(dp.begin(),dp.end(),0ll);
+        return ans%m;
+    }
+};
