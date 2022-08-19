@@ -1,0 +1,22 @@
+class Solution {
+    
+    bool find(char c,string &s,int &i){
+        for(int j=0;j<s.length();j++){
+            if(i!=j){
+                if(s[j]==c) return false;
+            }
+        }
+        return true;
+    }
+public:
+    int firstUniqChar(string s) {
+        int index=-1;
+        for(int i=0;i<s.length();i++){
+            if(find(s[i],s,i)){
+                index=i;
+                break;
+            } 
+        }
+        return index;
+    }
+};
